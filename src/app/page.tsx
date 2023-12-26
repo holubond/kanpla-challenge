@@ -1,10 +1,22 @@
 import { Card } from "@/components/Card";
 import { Heading } from "@/components/Heading";
 import { SearchUrlParam } from "./SearchUrlParam";
+import { InMemoryLocationRepo } from "@/db/locationRepo";
 
 const URL_PARAM_SEARCH = 'search'
 
-export default function Home() {
+async function getData() {
+  const repo = new InMemoryLocationRepo()
+
+  return await repo.getAllData()
+}
+
+export default async function Home() {
+
+  const data = await getData()
+
+  console.log(data)
+
   return (
     <div className="flex justify-center">
       <Card className="mt-5 w-5/6 sm:w-1/2">
