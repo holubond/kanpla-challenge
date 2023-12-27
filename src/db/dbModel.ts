@@ -15,3 +15,4 @@ export interface DbNode {
     };
 }
 
+export type DbNodeWithId = DbNode & {id: string}
