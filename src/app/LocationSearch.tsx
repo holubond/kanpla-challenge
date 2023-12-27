@@ -15,6 +15,7 @@ type Props = {
 }
 
 export function LocationSearch({ urlParam, placeholder }: Props) {
+    // Input
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
@@ -27,18 +28,29 @@ export function LocationSearch({ urlParam, placeholder }: Props) {
         router.replace(`${pathname}?${params.toString()}`)
     }
 
+    // Data fetching
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
+    const [nodes, setNodes] = useState<TreeNode[]>([])
 
     const search = searchParams.get(urlParam) ?? ''
+    useEffect(() => {
+        setIsLoading(true)
+        setError('')
+        getLocations(search ?? '')
+            .then((locations) => {
+                setNodes(locations)
+                setIsLoading(false)
+            })
+            .catch((_) => setError('ERROR: Loading locations failed'))
+    }, [search])
 
-    const [nodes, setNodes] = useState<TreeNode[]>([])
-    
+    // Node selection
     const [selectedNodes, setSelectedNodes] = useState<Scope>({groups: {}, locations: {}})
     useEffect(() => {
-        setSelectedNodes(scopeStorage.getScope())
+        setSelectedNodes(scopeStorage.getScope()) // LocalStorage may only be accessed after page mount
     }, [])
-
+    
     function toggleNode(id: string, isLocation: boolean) {
         // TODO handle update of other checkboxes. It might be beneficial to add {parent: TreeNode | undefined} to a TreeNode
         let scope
@@ -52,17 +64,6 @@ export function LocationSearch({ urlParam, placeholder }: Props) {
         scopeStorage.setScope(scope)
         setSelectedNodes(scope)
     }
-
-    useEffect(() => {
-        setIsLoading(true)
-        setError('')
-        getLocations(search ?? '')
-            .then((locations) => {
-                setNodes(locations)
-                setIsLoading(false)
-            })
-            .catch((_) => setError('ERROR: Loading locations failed'))
-    }, [search])
 
     return (
         <>
