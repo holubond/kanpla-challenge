@@ -1,15 +1,12 @@
 import { Card } from "@/components/Card";
 import { Heading } from "@/components/Heading";
 import { SearchUrlParam } from "./SearchUrlParam";
-import { InMemoryLocationRepo } from "@/db/locationRepo";
-import { DB1 } from "@/db/data";
+import { locationRepo } from "@/db/locationRepo";
 
 const URL_PARAM_SEARCH = 'search'
 
 async function getData() {
-  const repo = new InMemoryLocationRepo(DB1)
-
-  return await repo.getLocationsInGroupsByName('Dén')
+  return await locationRepo.getLocationsInGroupsByName('Dén')
 }
 
 export default async function Home() {

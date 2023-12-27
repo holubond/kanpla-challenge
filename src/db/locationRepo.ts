@@ -1,6 +1,7 @@
 import { DbTree } from "./dbModel"
 import { searchForm } from "@/utils/searchForm"
 import { childrenOf, includeBranch, parseTree } from "./utils"
+import { DB1 } from "./data"
 
 /**
  * Repository abstracting the database layer
@@ -12,7 +13,7 @@ export interface LocationRepo {
 /**
  * In-memory implementation of the LocationRepo repository
  */
-export class InMemoryLocationRepo implements LocationRepo {
+class InMemoryLocationRepo implements LocationRepo {
   private rawData: DbTree
 
   constructor(rawData: DbTree) {
@@ -72,3 +73,5 @@ export class InMemoryLocationRepo implements LocationRepo {
     return filteredTree
   }
 }
+
+export const locationRepo: LocationRepo = new InMemoryLocationRepo(DB1)
