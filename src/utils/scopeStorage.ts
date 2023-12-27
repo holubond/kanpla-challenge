@@ -1,3 +1,5 @@
+'use client'
+
 import { Scope } from '@/models/Scope'
 
 const SCOPE_SELECTION = 'SCOPE_SELECTION'

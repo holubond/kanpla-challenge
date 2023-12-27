@@ -33,9 +33,11 @@ export function LocationSearch({ urlParam, placeholder }: Props) {
     const search = searchParams.get(urlParam) ?? ''
 
     const [nodes, setNodes] = useState<TreeNode[]>([])
-    const [selectedNodes, setSelectedNodes] = useState<Scope>(
-        scopeStorage.getScope()
-    )
+    
+    const [selectedNodes, setSelectedNodes] = useState<Scope>({groups: {}, locations: {}})
+    useEffect(() => {
+        setSelectedNodes(scopeStorage.getScope())
+    }, [])
 
     function toggleNode(id: string, isLocation: boolean) {
         // TODO handle update of other checkboxes. It might be beneficial to add {parent: TreeNode | undefined} to a TreeNode
