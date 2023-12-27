@@ -13,7 +13,7 @@ export interface LocationRepo {
 /**
  * In-memory implementation of the LocationRepo repository
  */
-class InMemoryLocationRepo implements LocationRepo {
+export class InMemoryLocationRepo implements LocationRepo {
   private rawData: DbTree
 
   constructor(rawData: DbTree) {
