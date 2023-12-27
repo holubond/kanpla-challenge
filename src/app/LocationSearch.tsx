@@ -77,6 +77,7 @@ export function LocationSearch({ urlParam, placeholder }: Props) {
                 search.length > 0 &&
                 nodes.map((l) => (
                     <Node
+                        key={l.id}
                         node={l}
                         toggleNode={toggleNode}
                         selectedNodes={selectedNodes}
@@ -113,6 +114,7 @@ function Node({ node, toggleNode, selectedNodes }: NodeProps) {
             </label>
             {node.children.map((n) => (
                 <Node
+                    key={n.id}
                     node={n}
                     toggleNode={toggleNode}
                     selectedNodes={selectedNodes}
