@@ -1,36 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Kanpla challenge
 
-## Getting Started
+## Business case
 
-First, run the development server:
+We aim to develop a user-friendly system to manage a network of canteens across various locations. This system will enable easy searching for a specific selection of locations, organizing canteens in a hierarchy to ensure efficient management and data accuracy. To add complexity, let's assume that the number of canteens is very large and should be managed on the server. Only the searched portion of the hierarchy tree will be displayed to the client.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Possible improvements
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Selection persistence:** part of the task was to persist selections, a suggested solution was to write it to a file. As a selection is user-specific and there is no mechanism of recognising users apart from their IP address (which might be problematic) or setting each user a session cookie, I decided to store the selection of locations to client's local storage, as it made a bit more sense to me. If we wanted to store user selection on the server, the best solution would of course be to use a database accessed via a repository (similar to `locationRepo`) and store it along with a user identifier. 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Location selection propagation:** I did not implement the propagation of selected locations (when a group is selected, all of its children should also get selected) - this was due to rather busy Christmas holidays and approaching deadline which we agreed upon to reach a conclusion. I assume it would take me few more hours, there is a *TODO* in the code indicating where and how the feature would get implemented.
