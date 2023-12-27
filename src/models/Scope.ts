@@ -1,8 +1,8 @@
 export interface Scope {
     groups: {
-        [groupId: string]: {};
-    };
+        [groupId: string]: {}
+    }
     locations: {
-        [locationId: string]: {};
-    };
+        [locationId: string]: {}
+    }
 }

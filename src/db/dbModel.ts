@@ -1,18 +1,18 @@
 export interface DbTree {
     locations: {
-        [locationId: string]: DbNode;
-    };
+        [locationId: string]: DbNode
+    }
     groups: {
-        [groupId: string]: DbNode;
-    };
-    partnerId: string;
+        [groupId: string]: DbNode
+    }
+    partnerId: string
 }
 
 export interface DbNode {
-    name: string;
+    name: string
     parents: {
-        [groupId: string]: {};
-    };
+        [groupId: string]: {}
+    }
 }
 
-export type DbNodeWithId = DbNode & {id: string}
+export type DbNodeWithId = DbNode & { id: string }

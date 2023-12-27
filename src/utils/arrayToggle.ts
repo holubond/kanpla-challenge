@@ -3,6 +3,8 @@ type ObjectSet = {
 }
 
 export function objectSetToggle(element: string, object: ObjectSet): ObjectSet {
-    object[element] === undefined ? object[element] = {} : delete object[element]
-    return {...object}
+    object[element] === undefined
+        ? (object[element] = {})
+        : delete object[element]
+    return { ...object }
 }
