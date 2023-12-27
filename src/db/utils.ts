@@ -68,35 +68,27 @@ export function childrenOf(parent: DbNodeWithId, allNodes: DbNodeWithId[]): DbNo
  */
 export function includeBranch(subtreeRoot: DbNodeWithId, targetTree: DbTree, allNodes: DbNodeWithId[]) {
     // Include subtree
-    console.log(`include subtree with root ${subtreeRoot.id}`)
     let nodesToAdd = [subtreeRoot]
 
-    console.log(`\n...including subtree`)
     while (true) {
       const nodeToAdd = nodesToAdd.pop()
-      console.log(`nodeToAdd ${nodeToAdd?.id}`)
       if (nodeToAdd === undefined) break
   
       const children = childrenOf(nodeToAdd, allNodes)
-        console.log(`node has children ${children.map(c => c.id)}`)
 
       const { id, name, parents } = nodeToAdd
       if (children.length === 0) {
-        console.log(`no children - ${id} is a location`)
         targetTree.locations[id] = { name, parents }
     } else {
-          console.log(`some children - ${id} is a group`)
         targetTree.groups[id] = { name, parents }
 
         nodesToAdd.push(...children)
       }
     }
 
-    console.log(`\n...including ancestors`)
     // Include all ancestors 
     let ancestorId = Object.keys(subtreeRoot.parents).at(0)
     while (ancestorId !== undefined) {
-        console.log()
       const ancestor = allNodes.find(node => node.id === ancestorId) as DbNodeWithId // Expects a valid `allNodes` tree
       targetTree.groups[ancestorId] = { name: ancestor.name, parents: ancestor.parents }
       ancestorId = Object.keys(ancestor.parents).at(0)

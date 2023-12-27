@@ -33,11 +33,7 @@ test('includeBranch', async () => {
     
     // act
     let targetTree: DbTree = {groups: {}, locations: {}, partnerId: data.partnerId}
-    console.log(`all nodes: ${allNodes.map(n => n.id)}`)
     includeBranch(aarhusWithId, targetTree, allNodes)
-
-    console.log(`groups ${Object.keys(targetTree.groups)}`)
-    console.log(`locations ${Object.keys(targetTree.locations)}`)
 
     // expect
     expect(targetTree.groups).toStrictEqual(expectedGroups) 

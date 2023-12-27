@@ -48,24 +48,20 @@ export class InMemoryLocationRepo implements LocationRepo {
     let filteredTree: DbTree = { groups: {}, locations: {}, partnerId: fullTree.partnerId }
 
     for (const root of roots) {
-      // console.log(`\nexploring root ${root.id}`)
       let nodesToExplore = [root]
       
       while (true) {
         const exploredNode = nodesToExplore.pop()
-        // console.log(`exploring node ${exploredNode?.id}`)
         if (exploredNode === undefined) break
 
         const exploredName = searchForm(exploredNode.name)
         if (exploredName.includes(name)) {
-          // console.log(`including this branch`)
           // Include node, ancestors, and all its children
           includeBranch(exploredNode, filteredTree, allNodes)
           continue
         }
 
         const childrenToExplore = childrenOf(exploredNode, allNodes)
-        // console.log(`exploring children ${childrenToExplore.map(c => c.id)} ds`)
         nodesToExplore.push(...childrenToExplore)
       }
     }
